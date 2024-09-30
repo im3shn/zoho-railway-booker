@@ -77,6 +77,7 @@ public class Ticket implements Train{
             if ( p.hashCode()==passenger.hashCode() ) {
                 System.out.println( p.hashCode() + " " + passenger.hashCode() + ( p.hashCode()==passenger.hashCode() ) );
                 System.out.println("removed passenger => " + passenger.toString());
+                allotment.remove(p.getId());
                 l.remove(passenger);
                 return;
             }
