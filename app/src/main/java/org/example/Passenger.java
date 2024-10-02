@@ -1,13 +1,14 @@
 package org.example;
 
+import java.io.Serializable;
+
 /**
  * Passenger
  */
-public class Passenger {
+public class Passenger implements Serializable{
 
     private static int idProvider = 0;
     private int id;
-    
 	private String name;
     private int age;
     private int birthPreference;

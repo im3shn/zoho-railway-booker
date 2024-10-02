@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,21 +11,21 @@ import java.util.Queue;
 /**
  * Tickets
  */
-public class Ticket implements Train{
+public class Ticket implements Train, Serializable{
 
-    static int available_lower_birth = Train.lower;
-    static int available_middle_birth = Train.middle;
-    static int available_upper_birth = Train.upper;
-    static int available_waiting_tickets = Train.waiting;
-    static int available_rac_tickets = Train.rac;
+    int available_lower_birth = Train.lower;
+    int available_middle_birth = Train.middle;
+    int available_upper_birth = Train.upper;
+    int available_waiting_tickets = Train.waiting;
+    int available_rac_tickets = Train.rac;
 
-    static Map<Integer, Integer> allotment = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> allotment = new HashMap<Integer, Integer>();
     
-    static Queue<Passenger> waiting_list = new LinkedList<Passenger>();
-    static Queue<Passenger> rac_list = new LinkedList<Passenger>();
-    static List<Passenger> lower = new ArrayList<Passenger>();
-    static List<Passenger> middle = new ArrayList<Passenger>();
-    static List<Passenger> upper = new ArrayList<Passenger>();
+    Queue<Passenger> waiting_list = new LinkedList<Passenger>();
+    Queue<Passenger> rac_list = new LinkedList<Passenger>();
+    List<Passenger> lower = new ArrayList<Passenger>();
+    List<Passenger> middle = new ArrayList<Passenger>();
+    List<Passenger> upper = new ArrayList<Passenger>();
     
 
 	public void book(Passenger passenger) {
@@ -149,31 +150,31 @@ public class Ticket implements Train{
         printQueues(rac_list);
 	}
 
-    private static int checkAnyAvailability(){
+    private int checkAnyAvailability(){
         if ( isLowerAvailable() )
            return 0;
         if ( isMiddleAvailable() )
            return 1;
         if ( isUpperAvailable() )
            return 2;
-        if (available_waiting_tickets > 0)
+        if (this.available_waiting_tickets > 0)
            return -1;
-        if (available_rac_tickets > 0) 
+        if (this.available_rac_tickets > 0) 
            return -2;
         else
            return -3;
     }
 
-    private static boolean isLowerAvailable() {
-        return available_lower_birth > 0;
+    private boolean isLowerAvailable() {
+        return this.available_lower_birth > 0;
     }
     
-    private static boolean isMiddleAvailable() {
-        return available_middle_birth > 0;
+    private boolean isMiddleAvailable() {
+        return this.available_middle_birth > 0;
     }
 
-    private static boolean isUpperAvailable() {
-        return available_upper_birth > 0;
+    private boolean isUpperAvailable() {
+        return this.available_upper_birth > 0;
     }
 
     private void bookToLower(Passenger p){
